@@ -2,6 +2,7 @@ package wooteco.subway.path.infrastructure;
 
 import java.util.List;
 
+import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.WeightedMultigraph;
 
@@ -9,10 +10,10 @@ import wooteco.subway.line.domain.Section;
 import wooteco.subway.station.domain.Station;
 
 public abstract class PathGraph {
-    protected final WeightedMultigraph<Station, DefaultWeightedEdge> graph;
+    final WeightedMultigraph<Station, DefaultWeightedEdge> graph;
 
-    public PathGraph(WeightedMultigraph<Station, DefaultWeightedEdge> graph, List<Section> sections) {
-        this.graph = graph;
+    public PathGraph(List<Section> sections) {
+        this.graph = new WeightedMultigraph<>(DefaultWeightedEdge.class);
         createGraph(sections);
     }
 
@@ -24,7 +25,7 @@ public abstract class PathGraph {
         }
     }
 
-    public abstract List<Station> getStations(Station source, Station target);
+    public abstract List<Station> getStations();
 
-    public abstract int getDistance(Station source, Station target);
+    public abstract int getDistance();
 }

@@ -2,26 +2,27 @@ package wooteco.subway.path.infrastructure;
 
 import java.util.List;
 
+import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultWeightedEdge;
-import org.jgrapht.graph.WeightedMultigraph;
 
 import wooteco.subway.line.domain.Section;
 import wooteco.subway.station.domain.Station;
 
-
 public class PathWithDijkstra extends PathGraph {
-    public PathWithDijkstra(List<Section> sections) {
-        super(new WeightedMultigraph<>(DefaultWeightedEdge.class), sections);
+    private final GraphPath dijkstraShortestPath;
+
+    public PathWithDijkstra(List<Section> sections, Station source, Station target) {
+        super(sections);
+        this.dijkstraShortestPath = new DijkstraShortestPath(graph).getPath(source, target);
     }
 
     @Override
-    public List<Station> getStations(Station source, Station target) {
-        return new DijkstraShortestPath(graph).getPath(source, target).getVertexList();
+    public List<Station> getStations() {
+        return dijkstraShortestPath.getVertexList();
     }
 
     @Override
-    public int getDistance(Station source, Station target) {
-        return (int) new DijkstraShortestPath(graph).getPath(source, target).getWeight();
+    public int getDistance() {
+        return (int)dijkstraShortestPath.getWeight();
     }
 }

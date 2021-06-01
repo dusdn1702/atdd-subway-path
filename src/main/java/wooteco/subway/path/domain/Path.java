@@ -12,11 +12,11 @@ public class Path {
         this.pathGraph = pathGraph;
     }
 
-    public List<Station> getStations(Station source, Station target) {
-        return pathGraph.getStations(source, target);
+    public List<Station> getStations() {
+        return pathGraph.getStations();
     }
 
-    public int getDistance(Station source, Station target) {
-        return pathGraph.getDistance(source, target);
+    public int getDistance() {
+        return pathGraph.getDistance();
     }
 }
