@@ -3,6 +3,8 @@ package wooteco.subway.path.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import wooteco.subway.path.domain.Path;
+import wooteco.subway.station.domain.Station;
 import wooteco.subway.station.dto.StationResponse;
 
 public class PathResponse {
@@ -12,11 +14,9 @@ public class PathResponse {
     public PathResponse() {
     }
 
-    public PathResponse(Path path) {
-        this.stations = path.getStations().stream()
-            .map(station -> new StationResponse(station.getId(), station.getName()))
-            .collect(Collectors.toList());
-        this.distance = path.getDistance();
+    public PathResponse(List<StationResponse> stations, int distance) {
+        this.stations = stations;
+        this.distance = distance;
     }
 
     public List<StationResponse> getStations() {

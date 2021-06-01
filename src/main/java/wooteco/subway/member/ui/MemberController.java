@@ -1,6 +1,9 @@
 package wooteco.subway.member.ui;
 
 import java.net.URI;
+import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import wooteco.subway.auth.domain.AuthenticationPrincipal;
 import wooteco.subway.auth.domain.LoginMember;
+import wooteco.subway.auth.infrastructure.AuthorizationExtractor;
+import wooteco.subway.auth.infrastructure.JwtTokenProvider;
+import wooteco.subway.exception.InvalidTokenException;
 import wooteco.subway.member.application.MemberService;
 import wooteco.subway.member.dto.MemberRequest;
 import wooteco.subway.member.dto.MemberResponse;
